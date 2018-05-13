@@ -1,0 +1,130 @@
+How did viewing a diff between two versions of a file help you see the bug that
+was introduced?
+
+    Fill in your answer here: diff finds automatically all changes 
+
+How could having easy access to the entire history of a file make you a more
+efficient programmer in the long term?
+
+    Fill in your answer here i can do reviews or let do a review and see what improved e.g needs to be better 
+
+What do you think are the pros and cons of manually choosing when to create a
+commit, like you do in Git, vs having versions automatically saved, like Google
+docs does?
+
+    Fill in your answer here its more conscious and therefore if you dont forget more thorough or at the exact point 
+
+Why do you think some version control systems, like Git, allow saving multiple
+files in one commit, while others, like Google Docs, treat each file separately?
+
+    Fill in your answer here you can be faster in versioning , but can also mean to get sloppy 
+
+How can you use the commands git log and git diff to view the history of files?
+
+    Fill in your answer here i can log the changes i made and with diff i can view them ? 
+
+How might using version control make you more confident to make changes that
+could break something?
+
+    Fill in your answer here because i can always retrun to working version and dont need to start atthe beginning 
+
+Now that you have your workspace set up, what do you want to try using Git for?
+
+    Fill in your answer here start versioning my files and use it for logging and diff usage 
+
+C:\Users\tgdgrfe5\Downloads\version_control\reflections>FC game_new.js game_old.js
+Vergleichen der Dateien game_new.js und GAME_OLD.JS
+***** game_new.js
+KEY_CODES = {
+  13: 'enter',
+  32: 'space',
+***** GAME_OLD.JS
+KEY_CODES = {
+  32: 'space',
+*****
+
+***** game_new.js
+  37: 'left',
+  39: 'right',
+***** GAME_OLD.JS
+  37: 'left',
+  38: 'up',
+  39: 'right',
+*****
+
+***** game_new.js
+
+    if (KEY_STATUS.spacr) {
+      var rad = ((this.rot-90) * Math.PI)/180;
+***** GAME_OLD.JS
+
+    if (KEY_STATUS.up) {
+      var rad = ((this.rot-90) * Math.PI)/180;
+*****
+
+***** game_new.js
+    }
+    if (KEY_STATUS.enter) {
+      if (this.delayBeforeBullet <= 0) {
+***** GAME_OLD.JS
+    }
+    if (KEY_STATUS.space) {
+      if (this.delayBeforeBullet <= 0) {
+*****
+
+***** game_new.js
+      if (KEY_STATUS.space || window.gameStart) {
+        KEY_STATUS.space = false; // hack so we don't move right away
+        window.gameStart = false;
+***** GAME_OLD.JS
+      if (KEY_STATUS.space || window.gameStart) {
+        KEY_STATUS.space = false; // hack so we don't shoot right away
+        window.gameStart = false;
+*****
+
+-u stand for unified diff format 
+
+TGDGRFE5@U292877 MINGW64 ~/Downloads/version_control/reflections (master)
+$ diff -u game_new.js game_old.js
+--- game_new.js 2018-05-13 11:58:05.204557700 +0200
++++ game_old.js 2018-05-13 11:57:57.931703100 +0200
+@@ -4,9 +4,9 @@
+ //
+
+ KEY_CODES = {
+-  13: 'enter',
+   32: 'space',
+   37: 'left',
++  38: 'up',
+   39: 'right',
+   40: 'down',
+   70: 'f',
+@@ -392,7 +392,7 @@
+       this.vel.rot = 0;
+     }
+
+-    if (KEY_STATUS.spacr) {
++    if (KEY_STATUS.up) {
+       var rad = ((this.rot-90) * Math.PI)/180;
+       this.acc.x = 0.5 * Math.cos(rad);
+       this.acc.y = 0.5 * Math.sin(rad);
+@@ -406,7 +406,7 @@
+     if (this.delayBeforeBullet > 0) {
+       this.delayBeforeBullet -= delta;
+     }
+-    if (KEY_STATUS.enter) {
++    if (KEY_STATUS.space) {
+       if (this.delayBeforeBullet <= 0) {
+         this.delayBeforeBullet = 10;
+         for (var i = 0; i < this.bullets.length; i++) {
+@@ -919,7 +919,7 @@
+     waiting: function () {
+       Text.renderText(ipad ? 'Touch Sreen to Start' : 'Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);
+       if (KEY_STATUS.space || window.gameStart) {
+-        KEY_STATUS.space = false; // hack so we don't move right away
++        KEY_STATUS.space = false; // hack so we don't shoot right away
+         window.gameStart = false;
+         this.state = 'start';
+       }
+
+
